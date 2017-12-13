@@ -8,9 +8,9 @@ public class LinkList1 {
 		LinkList1 ll=new LinkList1();
 		int choice=0;
 		Scanner s=new Scanner(System.in);	
-		while(choice!=5) {
+		while(choice!=6) {
 		System.out.println("Enter your choice : ");
-		System.out.println("1:add element  2:add in Begining  3:add element at Nth poition  4:remove nth element 5:exit");
+		System.out.println("1:add element  2:add in Begining  3:add element at Nth poition  4:remove nth element 5: delete element 6:exit");
 		choice=s.nextInt();
 		switch(choice){
 			case 1:
@@ -50,7 +50,12 @@ public class LinkList1 {
 				ll.removeNth(pos);
 				break;
 			case 5:
-				choice=5;
+				System.out.println("Enter the element you want to delete :");
+				int e=s.nextInt();
+				ll.removeElement(e);
+				break;
+			case 6:
+				choice=6;
 				break;
 		  }
 		}
@@ -68,6 +73,25 @@ public class LinkList1 {
 			
 		}
 	}
+	public void removeElement(int n) {
+		int flag=0;
+		temp=new Node();
+		temp1=new Node();
+		temp.setNadr(head.getNode());
+		temp1.setNadr(head);
+		while(flag==0) {
+			if(temp.getNode().getData()!=n) {
+				temp1.setNadr(temp.getNode());
+				temp.setNadr(temp.getNode().getNode());
+			}else {
+				temp1.getNode().setNadr(temp.getNode().getNode());
+				flag++;
+			
+			}
+		}
+		print();
+		System.out.println();	
+	}
 	public void removeNth(int n) {
 		
 		if(head.getNode()==null) {
@@ -81,13 +105,14 @@ public class LinkList1 {
 				temp=new Node();
 				temp1=new Node();
 				temp.setNadr(head.getNode());
-				temp1.setNadr(head.getNode());
-				for(int i=1;i<=n-1;i++) {
+			//	temp1.setNadr(head.getNode());
+				/*for(int i=1;i<=n-1;i++) {
 					temp1.setNadr(temp1.getNode().getNode());
-				}
+				}*/
 				for(int i=1;i<=n-2;i++) {
 					temp.setNadr(temp.getNode().getNode());
 				}
+				temp1.setNadr(temp.getNode().getNode());
 				temp.getNode().setNadr(temp1.getNode().getNode());
 			}
 		}

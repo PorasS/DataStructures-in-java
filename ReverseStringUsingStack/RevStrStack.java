@@ -1,3 +1,4 @@
+//without using predefined stack class
 import java.util.Scanner;
 public class RevStrStack {
 

@@ -1,19 +1,15 @@
-import java.util.Arrays;
 import java.util.Scanner;
-
-import static java.lang.System.in;
-
 public class MaxHeap {
     int arr[];
     int i=0;
     public static void main(String args[]){
        MaxHeap mx=new MaxHeap();
-       Scanner s=new Scanner(in);
+       Scanner s=new Scanner(System.in);
        int flag=0;
        int choice=0;
         mx.arrInitialise();
-       while(flag!=3){
-           System.out.println("1:Insert 2:Display 3:Exit");
+       while(flag!=4){
+           System.out.println("1:Insert 2:Display 3:Delete 4:Exit");
            choice=s.nextInt();
            switch(choice){
                case 1:
@@ -25,7 +21,12 @@ public class MaxHeap {
                    mx.display();
                    break;
                case 3:
-                   flag=3;
+                   System.out.println("Delete a no:");
+                   int y=s.nextInt();
+                   mx.delete(y);
+                   break;
+               case 4:
+                   flag=4;
            }
        }
     }
@@ -52,6 +53,30 @@ public class MaxHeap {
             }
 
         }
+    }
+    public void check1(int j){
+        if(arr[j]<=arr[2*j]){
+            int temp=arr[j];
+            arr[j]=arr[2*j];
+            arr[2*j]=temp;
+            check1(2*j);
+        }else{
+            if(arr[j]<=arr[2*j+1]){
+                int temp=arr[j];
+                arr[j]=arr[2*j+1];
+                arr[2*j+1]=temp;
+                check1(2*j+1);
+            }
+        }
+    }
+    public void delete(int dt){
+        int j=1;
+        while(arr[j]!=dt){
+            j++;
+        }
+        arr[j]=arr[i];
+        i--;
+        check1(j);
     }
     public void display(){
 
